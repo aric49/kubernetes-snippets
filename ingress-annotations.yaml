@@ -1,0 +1,25 @@
+#Use these annotations to increase the size of clients posting data through NGINX ingress controller
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.org/client-max-body-size: 1024m
+  generation: 1
+  labels:
+    app: something
+    chart: something-0.1.0
+    heritage: Tiller
+    release: something
+  name: something-ingress
+  namespace: something
+spec:
+  rules:
+  - host: something.internal.company.com
+    http:
+      paths:
+      - backend:
+          serviceName: something-service
+          servicePort: http
+        path: /
